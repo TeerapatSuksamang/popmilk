@@ -194,6 +194,8 @@ restart_btn.addEventListener("click", () => {
     popup.style.display = "none";
     fire.style.display = "none";
     updateEquippedItems();
+    loadEquippedCat();
+    loadEquippedItems();
     clearInterval(timerInterval);
     startTimer();
 });
