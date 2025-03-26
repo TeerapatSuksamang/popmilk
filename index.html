@@ -17,6 +17,7 @@
 </head>
 <body>
     
+    <!-- open this na ja -->
     <div id="main-menu" class="screen">
         <div class="game-set float-end" >
             <button class="toggle-sound">
@@ -28,11 +29,14 @@
             <h1>Pop  <img src="img/milk.png" alt="" width="53rem"> <br> Milk</h1>
         </div>
 
-        <div id="cat-selected" class="mb-1">
-            <img src="img/c_p.png" alt="" class="cat">
-            <img src="img/" alt="" class="hat">
-            <img src="img/" alt="" class="eye">
+        <div class="charactor">
+            <div class="cat-selected" class="mb-1" style="transform: translateX(-50%);">
+                <img src="img/c_p.png" alt="" class="cat">
+                <img src="img/" alt="" class="hat">
+                <img src="img/" alt="" class="eye">
+            </div>
         </div>
+        
         <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
         <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
 
@@ -46,7 +50,7 @@
         <div class="game-head">
             <span class="game-data">
                 <!-- <div id="high-score">High : <span id="high-score-value">0</span></div> -->
-                <span id="score"><img src="img/milk.png" alt="" class="milk-point"> : <span id="score-value">0</span></span>
+                <span id="score" class="milk-point"><img src="img/milk.png" alt=""> : <span id="score-value">0</span></span>
             </span>
 
             <span id="time">30</span>
@@ -58,23 +62,25 @@
             </span>
         </div>
 
-        <div id="cat-container">
-            <img id="cat" src="img/c_p.png" alt="แมว">
-            <img id="fire" src="img/fire.png" alt="ไฟ">
-            <!-- <img id="hat" src="img/hat_pirate.png" alt="hat"> -->
-            <!-- <img id="gl" src="img/gl_eye.png" alt="hat"> -->
+        <div id="cat-container" class="charactor">
+            <div class="cat-selected" class="mb-1">
+                <img src="img/c_p.png" alt="" class="cat" id="cat">
+                <img src="img/fire.png" alt="" id="fire">
+                <img src="img/" alt="" class="hat" id="hat" >
+                <img src="img/" alt="" class="eye" id="eye" >
+            </div>
         </div>
 
         <div id="popup">
-            <img src="img/cat_cry.png" alt="" class="cat_action" id="cat_action">
+            <img src="img/cat_cry.png" alt="" class="cat_action" id="cat_cry">
             <!-- <p id="note">เอ้า ตายแล้วหรอ</p> -->
-            <p><img src="img/milk.png" alt="" class="milk-point"> x<span id="final-score">0</span></p>
+            <p class="milk-point"><img src="img/milk.png" alt=""> x<span id="final-score">0</span></p>
             <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
             <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
             <div>
                 <button id="restart-button" class="pink-button w-100">เล่นใหม่😺</button>
                 <div class="d-flex gap-2 justify-content-center ">
-                    <button id="main-menu-btn" class="pink-button w-100"><i class="fa-solid fa-house"></i></i></button>
+                    <button id="main-menu-btn" class="pink-button w-100 main-menu-btn"><i class="fa-solid fa-house"></i></i></button>
                     <button id="" class="custom-btn pink-button w-100"><i class="fa-solid fa-store"></i></button>
                 </div>
             </div>
@@ -83,14 +89,50 @@
 
 
     <div id="custom" class="hidden">
-        <div class="store-head">
-            <button id="back"><i class="fa-solid fa-chevron-left"></i></button>
-            <p><img src="img/milk.png" alt="" class="milk-point"> x<span class="all-score">0</span></p>
+        <div class="custom-head">
+            <button id="main-menu-btn"><i class="fa-solid fa-chevron-left main-menu-btn"></i></button>
+            <div>แต่งตัว</div>
+            <div class="milk-point"><img src="img/milk.png" alt="" > : <span class="all-score-display">0</span></div>
         </div>
+
         <div class="charactor">
-            <img src="img/c_p.png" alt="" width="10rem">
-            <button id="select">ซื้อ</button>
+            <div class="cat-selected" class=" mb-1">
+                <img src="img/c_p.png" alt="" class="cat">
+                <img src="" alt="" class="hat">
+                <img src="" alt="" class="eye">
+            </div>
         </div>
+
+        <div class="select-cat">
+            <button id="select" class="select-btn pink-button">สวมใส่</button>
+
+            <div class="costume">
+                <div class="costume-type">
+                    <button id="cat-icon"><i class="fa-solid fa-shield-cat"></i></button>
+                    <button id="hat-icon"><i class="fa-solid fa-hat-cowboy"></i></button>
+                    <button id="glasses-icon"><i class="fa-solid fa-glasses"></i></button>
+                </div>
+
+                <div class="costume-item">
+                    <div id="type-cat">
+                        <button id="c_p"><img src="img/c_p.png" alt=""></button>
+                        <button id="c_o" class="lock"><img src="img/c_o.png" alt=""></button>
+                    </div>
+
+                    <div id="type-hat">
+                        <button id="hat_none" ><img src="" alt=""></button>
+                        <button id="hat_pirate" class="lock"><img src="img/hat_pirate.png" alt=""></button>
+                    </div>
+
+                    <div id="type-glasses">
+                        <button id="gl_none" ><img src="" alt=""></button>
+                        <button id="gl_black" class="lock"><img src="img/gl_black.png" alt=""></button>
+                        <button id="gl_eye" class="lock"><img src="img/gl_eye.png" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
 
@@ -98,6 +140,7 @@
     <audio id="bomb_sound" src="sound/bomb.mp3" muted></audio>
     <audio id="bg_sound" src="sound/bg_sound.mp3" loop muted></audio>
 
+    <script src="custom.js"></script>
     <script src="sound.js"></script>
     <script src="main.js"></script>
     <!-- <script src="script.js"></script> -->

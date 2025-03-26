@@ -22,6 +22,19 @@ let score = 0;
 let gameOver = false;
 
 
+function loadEquippedCat() {
+    let equipped = JSON.parse(localStorage.getItem("equippedItems")) || {};
+    let catSkin = equipped.cat || "c_p"; // ถ้าไม่มีตัวเลือก ใช้ c_p เป็นค่าเริ่มต้น
+
+    cat.src = "img/" + catSkin + ".png"; // ✅ ใช้แมวที่เลือก
+}
+
+// โหลดตัวละครแมวตอนเริ่มเกม
+window.onload = () => {
+    loadEquippedCat();
+    loadEquippedItems();
+    startTimer();
+};
 
 // highscore_display.textContent = highScore;
 
@@ -65,6 +78,8 @@ function startTimer() {
 // window.onload = () => {
     startTimer();
 // };
+let equipped = JSON.parse(localStorage.getItem("equippedItems")) || {};
+let catSkin = equipped.cat || "c_p"; // ✅ ใช้ตัวแมวที่เลือก
 
 function createItem(type) {
     if (gameOver) return;
@@ -93,6 +108,8 @@ function createItem(type) {
         let itemBottom = item.offsetTop + item.offsetHeight; // จุดล่างของไอเทม
         let itemCenterX = item.offsetLeft + item.offsetWidth / 2; // จุดกึ่งกลางของไอเทม
     
+
+
         // ✅ เงื่อนไขใหม่: ไอเทมต้องชน "หัวแมว" เท่านั้น
         if (itemBottom >= catTop && itemBottom <= catTop + 5 && 
             itemCenterX >= catLeft && itemCenterX <= catRight) {
@@ -102,9 +119,9 @@ function createItem(type) {
                 score++;
                 score_display.textContent = score;
     
-                cat.src = 'img/' + "c_p_open.png";
+                cat.src = "img/" + catSkin + "_open.png";
                 setTimeout(() => {
-                    cat.src = 'img/' + "c_p.png";
+                    cat.src = "img/" + catSkin + ".png";
                 }, 250);
     
             } else if (item.dataset.type === "bomb") {
@@ -113,9 +130,9 @@ function createItem(type) {
             } else if (item.dataset.type === "clock") {
                 timeLeft += 5;
                 milk_sound.play();
-                cat.src = 'img/' + "c_p_open.png";
+                cat.src = "img/" + catSkin + "_open.png";
                 setTimeout(() => {
-                    cat.src = 'img/' + "c_p.png";
+                    cat.src = "img/" + catSkin + ".png";
                 }, 250);
             }
     
@@ -154,6 +171,8 @@ function endGame(type) {
     });
 
     setTimeout(() => {
+        var cat_cry = document.getElementById('cat_cry');
+        cat_cry.src = "img/" + catSkin + "_cry.png";
         popup.style.display = "block";
     }, 500);
 
@@ -174,6 +193,7 @@ restart_btn.addEventListener("click", () => {
     gameOver = false;
     popup.style.display = "none";
     fire.style.display = "none";
+    updateEquippedItems();
     clearInterval(timerInterval);
     startTimer();
 });
@@ -189,3 +209,42 @@ setInterval(() => {
         createItem(item_type);
     }
 }, 700);
+
+
+// ------- 
+document.addEventListener("keydown", moveCat);
+document.addEventListener("keyup", stopCat);
+
+let catSpeed = 7;
+let moveLeft = false;
+let moveRight = false;
+
+function moveCat(event) {
+    if (event.key === "ArrowLeft") {
+        moveLeft = true;
+    } else if (event.key === "ArrowRight") {
+        moveRight = true;
+    }
+}
+
+function stopCat(event) {
+    if (event.key === "ArrowLeft") {
+        moveLeft = false;
+    } else if (event.key === "ArrowRight") {
+        moveRight = false;
+    }
+}
+
+function updateCatPosition() {
+    if (moveLeft) {
+        catX = Math.max(0, catX - catSpeed);
+    }
+    if (moveRight) {
+        catX = Math.min(window.innerWidth - cat_container.offsetWidth, catX + catSpeed);
+    }
+    cat_container.style.left = `${catX}px`;
+
+    requestAnimationFrame(updateCatPosition);
+}
+
+updateCatPosition();

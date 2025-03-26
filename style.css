@@ -23,7 +23,7 @@ body {
 .screen {
     display: none; /* ซ่อนทุกหน้าเริ่มต้น */
     text-align: center;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 #main-menu {
@@ -59,8 +59,8 @@ body {
     -webkit-text-stroke: 3px #333;
 }
 
-#cat-selected .cat{
-    width: 8rem;
+.cat-selected .cat{
+    width: 9rem;
 }
 
 /* --------------------------------------------- */
@@ -99,7 +99,7 @@ body {
     align-items: center;
 }
 
-.milk-point{
+.milk-point img{
     width: 1.9rem;
     /* transform: translateY(25%); */
 }
@@ -126,7 +126,7 @@ body {
     height: 80px;
 }
 
-#cat, #fire, #hat, #gl{
+#cat, #fire, #hat, #eye{
     position: absolute;
     width: 125%;
     height: auto;
@@ -189,4 +189,193 @@ body {
 }
 
 /* ------------------------------------------------ */
+#custom * {
+    /* border: .5px solid green; */
+}
 
+#custom .custom-head{
+    border-bottom: 2px solid #fbc5c5;
+    display: flex;
+    align-items: center !important;
+    padding: .1rem .8rem;
+    margin-bottom: .5rem;
+}
+
+.custom-head #main-menu-btn{
+    all: unset;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 2rem;
+    /* border: 1px solid black; */
+}
+
+.custom-head .milk-point{
+    margin-left: auto;
+}
+
+.charactor {
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid black; */
+    position: relative;
+    
+}
+.charactor .cat-selected{
+    /* display: block; */
+    /* border: 1px solid green; */
+    position: relative;
+    width: 13rem;
+}
+
+.charactor .cat-selected img{
+    width: 100%;
+    position: absolute;
+    /* border: 1px solid red; */
+}
+
+/* --- */
+.select-cat .select-btn{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 1rem;
+    transition: all .3s;
+}
+
+.select-cat .select-btn:hover{
+    transform: scale(1.02) translateX(-50%);
+    background-color: #FBC5C5;
+}
+
+.select-cat .select-btn.active{
+    background-color: #FBC5C5;
+}
+
+.select-cat .costume{
+    background-color: #FBEBEE;
+}
+
+.select-cat .costume-type button{
+    all: unset;
+    cursor: pointer;
+    padding: .8rem 1.1rem;
+    font-size: 1.1rem;
+    border-radius: 5px 5px 0 0;
+}
+
+.select-cat .costume-type button:is(:hover, :focus),
+.select-cat .costume-type button.active  {
+    background: #FBC5C5;
+}
+
+/* -- */
+.costume-item {
+    background-color: #FBC5C5;
+    /* margin-top: 1rem; */
+    height: 100vh;
+    
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.costume-item button{
+    all: unset;
+    cursor: pointer;
+    padding: .4rem;
+    border: 3px solid #FBEBEE;
+    border-radius: 10px;
+    width: 4rem;
+    height: 4rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .2s;
+}
+
+.costume-item button:hover{
+    background-color: #FBEBEE;
+}
+
+.costume-item button img{
+    width: 100%;
+}
+
+.lock::after{
+    content: '🔒';
+    font-size: 1.5rem;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #3333332c;
+}
+
+/* ---- */
+.costume-category {
+    display: none;
+}
+
+.costume-category.active {
+    display: flex;
+}
+
+button.active {
+    background-color: #FBC5C5;
+}
+
+/* ---- */
+
+/* ✅ เพิ่มการแสดงปุ่มซื้อในรายการไอเทม */
+#custom .item-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 1rem;
+}
+
+#custom .item {
+    width: 60px;
+    height: 60px;
+    background: #eee;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+#custom .item:hover {
+    background: #ddd;
+}
+
+#custom .item.locked {
+    opacity: 0.5;
+}
+
+#custom .item.locked::after {
+    content: '🔒';
+    position: absolute;
+    bottom: 5px;
+    font-size: 1.2rem;
+}
+
+#custom .item .buy-btn {
+    position: absolute;
+    bottom: 5px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #ff9800;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+#custom .item.locked .buy-btn {
+    display: block;
+}
