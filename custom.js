@@ -147,30 +147,46 @@ costumeItems.forEach(function (item) {
     });
 });
 
-// แสดงตัวอย่างไอเทมที่เลือก
+// ✅ ฟังก์ชันแสดงตัวอย่างไอเทม (แต่ไม่บันทึกลง localStorage)
 function previewItem(itemId, category) {
-    console.log(category);
-    console.log(itemId);
+    console.log(`Preview ${category}: ${itemId}`);
     
-    if (category == "cat") {
-        document.getElementById("cat1").src = "img/" + itemId + ".png";
-        // document.querySelectorAll(".cat").forEach(img => {
-        //     img.src = "img/" + itemId + ".png";
-        // });
-    } else if (category == "hat") {
-        document.getElementById("hat1").src = "img/" + itemId + ".png";
-        // document.querySelectorAll(".hat").forEach(img => {
-        //     img.src = "img/" + itemId + ".png";
-        // });
-    } else if (category == "glasses") {
-        document.getElementById("eye1").src = "img/" + itemId + ".png";
-        // document.querySelectorAll(".eye").forEach(img => {
-        //     img.src = "img/" + itemId + ".png";
-        // });
+    if (category === "cat") {
+        // document.querySelectorAll(".cat").forEach(img => img.src = `img/${itemId}.png`);
+        document.getElementById("cat1").src = `img/${itemId}.png`;
+    } else if (category === "hat") {
+        // document.querySelectorAll(".hat").forEach(img => img.src = itemId !== "hat_none" ? `img/${itemId}.png` : "");
+        document.getElementById("hat1").src = itemId !== "hat_none" ? `img/${itemId}.png` : "";
+    } else if (category === "glasses") {
+        // document.querySelectorAll(".eye").forEach(img => img.src = itemId !== "gl_none" ? `img/${itemId}.png` : "");
+        document.getElementById("eye1").src = itemId !== "gl_none" ? `img/${itemId}.png` : "";
     }
 }
 
-// ซื้อไอเทม
+// ✅ ฟังก์ชันกดเลือกไอเทม (ซื้อหรือสวมใส่)
+costumeItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+        var itemId = this.id;
+        var category = this.parentNode.id.replace("type-", ""); // ดึงประเภทไอเทม (cat, hat, glasses)
+
+        // แสดงตัวอย่างไอเทม
+        previewItem(itemId, category);
+
+        if (ownedItems.includes(itemId)) {
+            selectButton.textContent = "สวมใส่";
+            selectButton.onclick = function () {
+                equipItem(itemId, category);
+            };
+        } else {
+            selectButton.textContent = `ซื้อเลย (${itemPrices[itemId]})`;
+            selectButton.onclick = function () {
+                buyItem(itemId, category);
+            };
+        }
+    });
+});
+
+// ✅ ฟังก์ชันซื้อไอเทม
 function buyItem(itemId, category) {
     if (all_score >= itemPrices[itemId]) {
         all_score -= itemPrices[itemId];
@@ -188,15 +204,9 @@ function buyItem(itemId, category) {
     }
 }
 
-// สวมใส่ไอเทม
+// ✅ ฟังก์ชันสวมใส่ไอเทม (กดปุ่ม "สวมใส่" แล้วเท่านั้น)
 function equipItem(itemId, category) {
-    if (category === "cat") {
-        equippedItems.cat = itemId; // ✅ เก็บตัวละครแมว
-    } else if (category === "hat") {
-        equippedItems.hat = itemId;
-    } else if (category === "glasses") {
-        equippedItems.glasses = itemId;
-    }
+    equippedItems[category] = itemId;
     localStorage.setItem("equippedItems", JSON.stringify(equippedItems));
     updateEquippedItems();
 }

@@ -22,6 +22,23 @@ let score = 0;
 let gameOver = false;
 
 
+// ✅ โหลดตัวละครและไอเทมที่เลือกมาใช้ในเกม (ต้องกด "สวมใส่" ก่อน)
+function loadEquippedItems() {
+    let equipped = JSON.parse(localStorage.getItem("equippedItems")) || {
+        cat: "c_p",
+        hat: "hat_none",
+        glasses: "gl_none"
+    };
+
+    // ✅ ใช้แมวที่เลือก
+    cat.src = `img/${equipped.cat}.png`;
+    // ✅ ใช้หมวกที่เลือก ถ้าเป็น "hat_none" ให้ซ่อนรูป
+    hat.src = equipped.hat !== "hat_none" ? `img/${equipped.hat}.png` : "";
+    // ✅ ใช้แว่นที่เลือก ถ้าเป็น "gl_none" ให้ซ่อนรูป
+    eye.src = equipped.glasses !== "gl_none" ? `img/${equipped.glasses}.png` : "";
+}
+
+
 function loadEquippedCat() {
     let equipped = JSON.parse(localStorage.getItem("equippedItems")) || {};
     let catSkin = equipped.cat || "c_p"; // ถ้าไม่มีตัวเลือก ใช้ c_p เป็นค่าเริ่มต้น
@@ -31,9 +48,10 @@ function loadEquippedCat() {
 
 // โหลดตัวละครแมวตอนเริ่มเกม
 window.onload = () => {
+    updateEquippedItems
     loadEquippedCat();
     loadEquippedItems();
-    startTimer();
+    // startTimer();
 };
 
 // highscore_display.textContent = highScore;
