@@ -153,20 +153,20 @@ function previewItem(itemId, category) {
     console.log(itemId);
     
     if (category == "cat") {
-        document.querySelectorAll(".cat").src = "img/" + itemId + ".png";
-        document.querySelectorAll(".cat").forEach(img => {
-            img.src = "img/" + itemId + ".png";
-        });
+        document.getElementById("cat1").src = "img/" + itemId + ".png";
+        // document.querySelectorAll(".cat").forEach(img => {
+        //     img.src = "img/" + itemId + ".png";
+        // });
     } else if (category == "hat") {
-        document.querySelectorAll(".hat").src = "img/" + itemId + ".png";
-        document.querySelectorAll(".hat").forEach(img => {
-            img.src = "img/" + itemId + ".png";
-        });
+        document.getElementById("hat1").src = "img/" + itemId + ".png";
+        // document.querySelectorAll(".hat").forEach(img => {
+        //     img.src = "img/" + itemId + ".png";
+        // });
     } else if (category == "glasses") {
-        document.querySelectorAll(".eye").src = "img/" + itemId + ".png";
-        document.querySelectorAll(".hat").forEach(img => {
-            img.src = "img/" + itemId + ".png";
-        });
+        document.getElementById("eye1").src = "img/" + itemId + ".png";
+        // document.querySelectorAll(".eye").forEach(img => {
+        //     img.src = "img/" + itemId + ".png";
+        // });
     }
 }
 
