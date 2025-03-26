@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱</title>
+    <script src="https://kit.fontawesome.com/739287037b.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <div id="main-menu" class="screen">
+        <div class="game-set float-end" >
+            <button class="toggle-sound">
+                <img src="img/mute.png" alt="" class="sound-icon">
+            </button>
+        </div>
+
+        <div class="game-name">
+            <h1>Pop  <img src="img/milk.png" alt="" width="53rem"> <br> Milk</h1>
+        </div>
+
+        <div id="cat-selected" class="mb-1">
+            <img src="img/c_p.png" alt="" class="cat">
+            <img src="img/" alt="" class="hat">
+            <img src="img/" alt="" class="eye">
+        </div>
+        <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
+        <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
+
+        <button class="pink-button w-100" id="start-btn">เริ่ม <i class="fa-solid fa-play"></i></button>
+        <br>
+        <button class="pink-button w-100 custom-btn">แต่งตัว <i class="fa-solid fa-paw"></i></button>
+    </div>
+
+
+    <div id="game-container" class="hidden">
+        <div class="game-head">
+            <span class="game-data">
+                <!-- <div id="high-score">High : <span id="high-score-value">0</span></div> -->
+                <span id="score"><img src="img/milk.png" alt="" class="milk-point"> : <span id="score-value">0</span></span>
+            </span>
+
+            <span id="time">30</span>
+
+            <span class="game-set">
+                <button class="toggle-sound">
+                    <img src="img/mute.png" alt="" class="sound-icon">
+                </button>
+            </span>
+        </div>
+
+        <div id="cat-container">
+            <img id="cat" src="img/c_p.png" alt="แมว">
+            <img id="fire" src="img/fire.png" alt="ไฟ">
+            <!-- <img id="hat" src="img/hat_pirate.png" alt="hat"> -->
+            <!-- <img id="gl" src="img/gl_eye.png" alt="hat"> -->
+        </div>
+
+        <div id="popup">
+            <img src="img/cat_cry.png" alt="" class="cat_action" id="cat_action">
+            <!-- <p id="note">เอ้า ตายแล้วหรอ</p> -->
+            <p><img src="img/milk.png" alt="" class="milk-point"> x<span id="final-score">0</span></p>
+            <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
+            <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
+            <div>
+                <button id="restart-button" class="pink-button w-100">เล่นใหม่😺</button>
+                <div class="d-flex gap-2 justify-content-center ">
+                    <button id="main-menu-btn" class="pink-button w-100"><i class="fa-solid fa-house"></i></i></button>
+                    <button id="" class="custom-btn pink-button w-100"><i class="fa-solid fa-store"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="custom" class="hidden">
+        <div class="store-head">
+            <button id="back"><i class="fa-solid fa-chevron-left"></i></button>
+            <p><img src="img/milk.png" alt="" class="milk-point"> x<span class="all-score">0</span></p>
+        </div>
+        <div class="charactor">
+            <img src="img/c_p.png" alt="" width="10rem">
+            <button id="select">ซื้อ</button>
+        </div>
+    </div>
+
+
+    <audio id="milk_sound" src="sound/milk.mp3" muted></audio>
+    <audio id="bomb_sound" src="sound/bomb.mp3" muted></audio>
+    <audio id="bg_sound" src="sound/bg_sound.mp3" loop muted></audio>
+
+    <script src="sound.js"></script>
+    <script src="main.js"></script>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
