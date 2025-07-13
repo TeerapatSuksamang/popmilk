@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱</title>
+    <script src="https://kit.fontawesome.com/739287037b.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/png" href="img/c_p_close.png" class="img">
+    <meta property="og:image" content="img/c_p_close.png" />
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <!-- open this na ja -->
+    <div id="main-menu" class="screen">
+        <!-- ปุ่มปรับเสียง -->
+        <div class="game-set float-end" >
+            <button class="toggle-sound">
+                <img src="img/mute.png" alt="" class="sound-icon">
+            </button>
+        </div>
+
+        <div class="game-name">
+            <h1>Pop  <img src="img/milk.png" alt="" width="53rem"> <br> Milk</h1>
+        </div>
+
+        <div class="charactor">
+            <div class="cat-selected" class="mb-1" style="transform: translateX(-50%);">
+                <img src="img/c_p.png" alt="" class="cat">
+                <img src="img/" alt="" class="hat">
+                <img src="img/" alt="" class="eye">
+            </div>
+        </div>
+        
+        <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
+        <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
+
+        <button class="pink-button w-100" id="start-btn">เริ่ม <i class="fa-solid fa-play"></i></button>
+        <br>
+        <button class="pink-button w-100 custom-btn">แต่งตัว <i class="fa-solid fa-paw"></i></button>
+    </div>
+
+    <!-- หน้าเกม -->
+    <div id="game-container" class="hidden">
+        <div class="game-head">
+            <span class="game-data">
+                <!-- <div id="high-score">High : <span id="high-score-value">0</span></div> -->
+                <span id="score" class="milk-point"><img src="img/milk.png" alt=""> : <span id="score-value">0</span></span>
+            </span>
+
+            <span id="time">30</span>
+
+            <span class="game-set">
+                <button class="toggle-sound">
+                    <img src="img/mute.png" alt="" class="sound-icon">
+                </button>
+            </span>
+        </div>
+
+        <!-- ตัวแมว -->
+        <div id="cat-container" class="charactor">
+            <div class="cat-selected" class="mb-1">
+                <img src="img/c_p.png" alt="" class="cat" id="cat">
+                <img src="img/fire.png" alt="" id="fire">
+                <img src="img/" alt="" class="hat" id="hat" >
+                <img src="img/" alt="" class="eye" id="eye" >
+            </div>
+        </div>
+
+        <!-- ป้อพอัพเมื่อจบเกม -->
+        <div id="popup">
+            <img src="img/cat_cry.png" alt="" class="cat_action" id="cat_cry">
+            <!-- <p id="note">เอ้า ตายแล้วหรอ</p> -->
+            <p class="milk-point"><img src="img/milk.png" alt=""> x<span id="final-score">0</span></p>
+            <p>คะแนนสูงสุด: <span class="final-high-score">0</span></p>
+            <p>คะแนนทั้งหมด: <span class="all-score-display">0</span></p>
+            <div>
+                <button id="restart-button" class="pink-button w-100">เล่นใหม่😺</button>
+                <div class="d-flex gap-2 justify-content-center ">
+                    <button id="main-menu-btn" class="pink-button w-100 main-menu-btn"><i class="fa-solid fa-house"></i></i></button>
+                    <button id="" class="custom-btn pink-button w-100"><i class="fa-solid fa-store"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าแต่งตัว ซื้อสกิน -->
+    <div id="custom" class="hidden">
+        <div class="custom-head">
+            <button id="main-menu-btn"><i class="fa-solid fa-chevron-left main-menu-btn"></i></button>
+            <div>แต่งตัว</div>
+            <div class="milk-point"><img src="img/milk.png" alt="" > : <span class="all-score-display">0</span></div>
+        </div>
+
+        <div class="charactor">
+            <div class="cat-selected" class=" mb-1">
+                <img src="img/c_p.png" alt="" id="cat1">
+                <img src="" alt="" id="hat1">
+                <img src="" alt="" id="eye1">
+            </div>
+        </div>
+
+        <div class="select-cat">
+            <button id="select" class="select-btn pink-button">สวมใส่</button>
+
+            <div class="costume">
+                <div class="costume-type">
+                    <button id="cat-icon"><i class="fa-solid fa-shield-cat"></i></button>
+                    <button id="hat-icon"><i class="fa-solid fa-hat-cowboy"></i></button>
+                    <button id="glasses-icon"><i class="fa-solid fa-glasses"></i></button>
+                </div>
+
+                <div class="costume-item">
+                    <div id="type-cat">
+                        <button id="c_p"><img src="img/c_p.png" alt=""></button>
+                        <button id="c_o" class="lock"><img src="img/c_o.png" alt=""></button>
+                    </div>
+
+                    <div id="type-hat">
+                        <button id="hat_none" ><img src="" alt=""></button>
+                        <button id="hat_pirate" class="lock"><img src="img/hat_pirate.png" alt=""></button>
+                    </div>
+
+                    <div id="type-glasses">
+                        <button id="gl_none" ><img src="" alt=""></button>
+                        <button id="gl_black" class="lock"><img src="img/gl_black.png" alt=""></button>
+                        <button id="gl_eye" class="lock"><img src="img/gl_eye.png" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <audio id="milk_sound" src="sound/milk.mp3" muted></audio>
+    <audio id="bomb_sound" src="sound/bomb.mp3" muted></audio>
+    <audio id="bg_sound" src="sound/bg_sound.mp3" loop muted></audio>
+
+    <script src="custom.js"></script>
+    <script src="sound.js"></script>
+    <script src="script.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Runner Demo</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #a0e7f5; /* ฟ้าพาสเทล */
+    }
+
+    #ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      background: #3cb043; /* เขียวพื้นดิน */
+    }
+
+    #player {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: pink;
+      bottom: 100px;
+      left: 100px;
+      transition: transform 0.1s;
+    }
+
+    .obstacle, .bird, .milk {
+      position: absolute;
+      bottom: 100px;
+    }
+
+    .obstacle {
+      width: 50px;
+      height: 50px;
+      background: #006400; /* เขียวเข้ม = ถังขยะ */
+    }
+
+    .bird {
+      width: 50px;
+      height: 30px;
+      background: black;
+      bottom: 150px; /* บินสูงขึ้นจากพื้น */
+    }
+
+    .milk {
+      width: 30px;
+      height: 30px;
+      background: blue;
+    }
+
+    #popup {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border: 2px solid #000;
+      display: none;
+      text-align: center;
+    }
+
+    button {
+      margin: 0.5rem;
+    }
+
+    #controls {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 30px;
+        pointer-events: none; /* ป้องกันการกดเกินปุ่ม */
+    }
+
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        pointer-events: auto; /* เปิดให้ปุ่มกดได้ */
+    }
+
+  </style>
+</head>
+<body>
+  <div id="ground"></div>
+  <div id="player"></div>
+  <div id="popup">
+    <h2>Game Over</h2>
+    <button id="restart">เล่นใหม่</button>
+    <button id="mainMenu">กลับหน้าหลัก</button>
+    <button id="customize">แต่งตัว</button>
+  </div>
+
+  <div id="controls">
+    <button id="slideBtn" class="control-btn">Slide</button>
+    <button id="jumpBtn" class="control-btn">Jump</button>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const popup = document.getElementById('popup');
+    const ground = document.getElementById('ground');
+    document.getElementById("slideBtn").addEventListener("touchstart", start_slide);
+    document.getElementById("slideBtn").addEventListener("touchend", stop_slide);
+    document.getElementById("jumpBtn").addEventListener("click", jump);
+
+    let isJumping = false;
+    let isSliding = false;
+    let velocityY = 0;
+    let gravity = 0.25;
+    let groundY = 100;
+    let playerY = 0;
+
+    let obstacles = [];
+    let speed = 4;
+    let gameOver = false;
+
+    function jump() {
+        console.log('jump');
+      if (isJumping) return;
+
+      isJumping = true;
+      velocityY = 8;
+
+      // หดก่อนดีด
+      player.style.transform = "scaleY(0.8)";
+      setTimeout(() => {
+        player.style.transform = "scaleY(1.2)";
+      }, 100);
+    }
+
+    function start_slide() {
+        if (isJumping || isSliding) return;
+        console.log('slide');
+
+      isSliding = true;
+    //   player.style.transform = "scaleY(0.5)";
+      player.style.height = "10px";
+    }
+
+    function stop_slide() {
+        isSliding = false;
+        // player.style.transform = "scaleY(1)";
+        player.style.height = "50px";
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space' || e.code === 'ArrowUp') jump();
+      if (e.code === 'ArrowDown') start_slide();
+    });
+
+    document.addEventListener('keyup', e => {
+        if (e.code === 'ArrowDown') stop_slide();
+    });
+
+    function createObstacle() {
+      const type = Math.random();
+      let el;
+
+      if (type < 0.4) {
+        el = document.createElement('div');
+        el.className = 'obstacle';
+        el.style.left = '100%';
+      } else if (type < 0.7) {
+        el = document.createElement('div');
+        el.className = 'bird';
+        el.style.left = '100%';
+      } else {
+        el = document.createElement('div');
+        el.style.left = '100%';
+      }
+
+      document.body.appendChild(el);
+      obstacles.push(el);
+
+      // มีโอกาสวางกล่องนม
+      if (Math.random() < 0.5) {
+        const milk = document.createElement('div');
+        milk.className = 'milk';
+        milk.style.left = '100%';
+        milk.style.bottom = type < 0.4 ? '150px' : '180px';
+        document.body.appendChild(milk);
+        obstacles.push(milk);
+      }
+    }
+
+    function checkCollision(rect1, rect2) {
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
+    }
+
+    function gameLoop() {
+      if (gameOver) return;
+
+      velocityY -= gravity;
+      playerY += velocityY;
+
+      if (playerY <= 0) {
+        playerY = 0;
+        isJumping = false;
+        player.style.transform = "scaleY(1)";
+      }
+
+      player.style.bottom = `${groundY + playerY}px`;
+
+      obstacles.forEach((obs, i) => {
+        let left = obs.offsetLeft - speed;
+        obs.style.left = `${left}px`;
+
+        const playerRect = player.getBoundingClientRect();
+        const obsRect = obs.getBoundingClientRect();
+
+        if (obs.className === 'milk') {
+          if (checkCollision(playerRect, obsRect)) {
+            obs.remove();
+            obstacles.splice(i, 1);
+            // เพิ่มคะแนนตรงนี้ได้
+          }
+        } else {
+          if (checkCollision(playerRect, obsRect)) {
+            endGame();
+          }
+        }
+
+        if (left + obs.offsetWidth < 0) {
+          obs.remove();
+          obstacles.splice(i, 1);
+        }
+      });
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    function endGame() {
+      gameOver = true;
+      popup.style.display = 'block';
+    }
+
+    setInterval(() => {
+      if (!gameOver) createObstacle();
+    }, 2000);
+
+    document.getElementById('restart').onclick = () => location.reload();
+    document.getElementById('mainMenu').onclick = () => alert('กลับหน้าหลัก (ทำระบบเพิ่มเอง)');
+    document.getElementById('customize').onclick = () => alert('ไปหน้าแต่งตัว (ทำระบบเพิ่มเอง)');
+
+    gameLoop();
+  </script>
+</body>
+</html>

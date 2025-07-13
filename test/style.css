@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    font-family: "Mali", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* border: 1px solid red; */
+}
+
+body {
+    /* text-align: center; */
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    overflow: hidden;
+}
+
+.screen {
+    display: none; /* ซ่อนทุกหน้าเริ่มต้น */
+    text-align: center;
+    /* padding: 20px; */
+}
+
+#main-menu {
+    display: block; /* หน้าแรกต้องแสดงก่อน */
+}
+
+.hidden {
+    display: none !important; /* ใช้ class 'hidden' ซ่อน */
+}
+
+
+/* --------------------------------------------- */
+
+#main-menu {
+    /* align-items: center; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e0f7fa;
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+
+.game-name{
+    text-align: center;
+}
+.game-name h1{
+    font-weight: 1000;
+    font-size: 3rem;
+    color: #fbc5c5;
+    -webkit-text-stroke: 3px #333;
+}
+
+.cat-selected .cat{
+    width: 9rem;
+}
+
+/* --------------------------------------------- */
+
+#game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e0f7fa;
+    overflow: hidden;
+}
+
+.game-head{
+    position: relative;
+    padding: .5rem;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    background: none;
+}
+
+.game-head #time{
+    font-size: 1.8rem;
+}
+ 
+#score, #high-score {  
+    font-weight: bold;
+    z-index: 2;
+}
+
+#score{
+    display: flex;
+    gap: .3rem;
+    align-items: center;
+}
+
+.milk-point img{
+    width: 1.9rem;
+    /* transform: translateY(25%); */
+}
+
+.game-set button {
+    all: unset; 
+    right: 0;
+    font-size: 1.6rem;  
+    margin: .5rem 1rem;
+    cursor: pointer;
+    border-radius: 10px; 
+    /* border: 1px solid red; */
+}
+
+.game-set img{
+    width: 1.8rem;
+}
+
+#cat-container {
+    position: absolute;
+    bottom: 9rem;
+    /* left: 50%;
+    transform: translateX(-50%); */
+    width: 80px;
+    height: 80px;
+}
+
+#cat, #fire, #hat, #eye{
+    position: absolute;
+    width: 125%;
+    height: auto;
+    transition: transform 0.1s;
+    bottom: 0;
+}
+
+#fire {
+    display: none;
+    /* margin-left: -10%; */
+    transform: translateX(-40%);
+    width: 240%;
+}
+
+.item {
+    position: absolute;
+    width: 3rem;
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18rem;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#popup .cat_action {
+    width: 11rem;
+    margin-bottom: .6rem;
+    margin-top: -6rem;
+}
+
+.pink-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: .5rem;
+    border-radius: 10px;
+    border: 2px solid #FBC5C5;
+    background: #FBEBEE;
+    min-width: fit-content !important;
+    width: 5rem;
+    max-width: 15rem;
+    transition: all .3s;
+}
+
+.pink-button:hover{
+    transform: scale(1.05);
+}
+
+.pink-button:active{
+    transform: scale(1);
+}
+
+/* ------------------------------------------------ */
+#custom * {
+    /* border: .5px solid green; */
+}
+
+#custom .custom-head{
+    border-bottom: 2px solid #fbc5c5;
+    display: flex;
+    align-items: center !important;
+    padding: .1rem .8rem;
+    margin-bottom: .5rem;
+}
+
+.custom-head #main-menu-btn{
+    all: unset;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 2rem;
+    /* border: 1px solid black; */
+}
+
+.custom-head .milk-point{
+    margin-left: auto;
+}
+
+.charactor {
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid black; */
+    position: relative;
+    
+}
+.charactor .cat-selected{
+    /* display: block; */
+    /* border: 1px solid green; */
+    position: relative;
+    width: 13rem;
+}
+
+.charactor .cat-selected img{
+    width: 100%;
+    position: absolute;
+    /* border: 1px solid red; */
+}
+
+/* --- */
+.select-cat .select-btn{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 1rem;
+    transition: all .3s;
+}
+
+.select-cat .select-btn:hover{
+    transform: scale(1.02) translateX(-50%);
+    background-color: #FBC5C5;
+}
+
+.select-cat .select-btn.active{
+    background-color: #FBC5C5;
+}
+
+.select-cat .costume{
+    background-color: #FBEBEE;
+}
+
+.select-cat .costume-type button{
+    all: unset;
+    cursor: pointer;
+    padding: .8rem 1.1rem;
+    font-size: 1.1rem;
+    border-radius: 5px 5px 0 0;
+}
+
+.select-cat .costume-type button:is(:hover, :focus),
+.select-cat .costume-type button.active  {
+    background: #FBC5C5;
+}
+
+/* -- */
+.costume-item {
+    background-color: #FBC5C5;
+    /* margin-top: 1rem; */
+    height: 100vh;
+    
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.costume-item button{
+    all: unset;
+    cursor: pointer;
+    padding: .4rem;
+    border: 3px solid #FBEBEE;
+    border-radius: 10px;
+    width: 4rem;
+    height: 4rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .2s;
+}
+
+.costume-item button:hover{
+    background-color: #FBEBEE;
+}
+
+.costume-item button img{
+    width: 100%;
+}
+
+.lock::after{
+    content: '🔒';
+    font-size: 1.5rem;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #3333332c;
+}
+
+/* ---- */
+.costume-category {
+    display: none;
+}
+
+.costume-category.active {
+    display: flex;
+}
+
+button.active {
+    background-color: #FBC5C5;
+}
+
+/* ---- */
+
+/* ✅ เพิ่มการแสดงปุ่มซื้อในรายการไอเทม */
+#custom .item-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 1rem;
+}
+
+#custom .item {
+    width: 60px;
+    height: 60px;
+    background: #eee;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+#custom .item:hover {
+    background: #ddd;
+}
+
+#custom .item.locked {
+    opacity: 0.5;
+}
+
+#custom .item.locked::after {
+    content: '🔒';
+    position: absolute;
+    bottom: 5px;
+    font-size: 1.2rem;
+}
+
+#custom .item .buy-btn {
+    position: absolute;
+    bottom: 5px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #ff9800;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+#custom .item.locked .buy-btn {
+    display: block;
+}
